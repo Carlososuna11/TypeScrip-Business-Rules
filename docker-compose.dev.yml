@@ -1,13 +1,15 @@
 version: '3.8'
 services:
-  server:
+  business-rules:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
+    command: npm run business-rules:dev
     volumes:
-      - .:/usr/src/app
+      - ./:/usr/src/app
+      - notused:/usr/src/app/node_modules
     ports:
-      - '3000:3000'
+      - '3333:3333'
     env_file:
       - ./.env.dev
     depends_on:
@@ -25,3 +27,4 @@ services:
 
 volumes:
   postgres_data:
+  notused: null

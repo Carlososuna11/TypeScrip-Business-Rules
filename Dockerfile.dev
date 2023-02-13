@@ -5,6 +5,7 @@ FROM node:18.12.0-buster
 LABEL Name=Node-dev-18.12.0 Version=0.0.1
 # Set to nointeractive mode
 ENV DEBIAN_FRONTEND=noninteractive
+ENV NODE_ENV=development
 
 
 # Ajust timezone
@@ -32,9 +33,11 @@ ENV PATH=/usr/src/app/node_modules/.bin:$PATH
 COPY package*.json ./
 
 # Install the dependencies and devDependencies
-RUN npm install
+RUN npm install && npm cache clean --force
+RUN mkdir ./node_modules/.cache && chmod -R 777 ./node_modules/.cache
 
 # Copy the rest of the files to the working directory
 COPY . .
 
-CMD ["npm", "run", "dev"]
+
+CMD ["npm", "run", "business-rules:dev"]

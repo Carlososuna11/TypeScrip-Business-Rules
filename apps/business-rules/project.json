@@ -55,6 +55,38 @@
           "codeCoverage": true
         }
       }
+    },
+    "typeorm": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "ts-node --project tsconfig.app.json ../../node_modules/typeorm/cli",
+        "cwd": "apps/business-rules"
+      }
+    },
+    "typeorm:create": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "nx run business-rules:typeorm migration:create src/database/migrations/{args.name}",
+        "cwd": "apps/business-rules"
+      }
+    },
+    "typeorm:generate": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "nx run business-rules:typeorm migration:generate src/database/migrations/{args.name} -d src/app/database/data.source.ts",
+        "cwd": "apps/business-rules"
+      }
+    },
+    "typeorm:run": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "nx run business-rules:typeorm migration:run -d src/app/database/data.source.ts",
+        "cwd": "apps/business-rules"
+      }
     }
   },
   "tags": []
