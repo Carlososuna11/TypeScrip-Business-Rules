@@ -34,6 +34,7 @@ export class ApiUploadDataService {
     const startField = arrayFields.shift();
     const startLetter = startField[0];
     const startNumber = Number(startField.replace(startLetter, ''));
+    //letra final
     const endLetter = arrayFields[0][0];
     const endNumber = Number(arrayFields[0].replace(endLetter, ''));
     const objectKeys = []
