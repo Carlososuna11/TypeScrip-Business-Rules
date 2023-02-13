@@ -1,22 +1,23 @@
-import { Controller, Get, Query, Res, Headers } from '@nestjs/common';
+import { Controller, Get, Query, Res, Headers, Post, Body } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ApiUploadDataService } from './api-upload-data.service';
 import { Response } from 'express';
+import { UploadDataEntry } from '../validation/upload-csv';
+import { URLS } from '@business-rules/shared/urls';
 
 @Controller()
-@ApiTags('AcademicLevels-By-SchoolYear-v2')
+@ApiTags('Upload-data')
 export class ApiUploadDataController {
   constructor(private apiUploadDataService: ApiUploadDataService) {}
 
-  @Get(URLS.academicDegreeSectionByYear)
-  async findAllDegreeSectionByYear(@Query() query, @Res() res: Response, @Headers() headers) {
-    await this.apiUploadDataService
-      .withDegreeSectionByYear()
+  @Post(URLS.uploadCsv)
+  async uploadCsv(@Body() body: UploadDataEntry, @Query() query, @Res() res: Response, @Headers() headers) {
+    await this.apiUploadDataService.uploadCsv(body)
       .then((result) => {
         res.status(200).send(true);
       })
       .catch((error) => {
-        res.status(404).send(true);
+        res.status(200).send(true);
       });
   }
 }
