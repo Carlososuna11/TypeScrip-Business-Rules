@@ -14,7 +14,7 @@ export class ApiUploadDataController {
   async uploadCsv(@Body() body: UploadDataEntry, @Query() query, @Res() res: Response, @Headers() headers) {
     await this.apiUploadDataService.uploadCsv(body)
       .then((result) => {
-        res.status(200).send(true);
+        res.status(200).send(result);
       })
       .catch((error) => {
         res.status(200).send(true);
