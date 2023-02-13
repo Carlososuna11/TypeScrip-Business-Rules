@@ -20,4 +20,15 @@ export class ApiUploadDataController {
         res.status(200).send(true);
       });
   }
+
+  @Post(URLS.uploadExcel)
+  async uploadExcel(@Body() body: UploadDataEntry, @Query() query, @Res() res: Response, @Headers() headers) {
+    await this.apiUploadDataService.uploadXlsx(body)
+      .then((result) => {
+        res.status(200).send(result);
+      })
+      .catch((error) => {
+        res.status(200).send(true);
+      });
+  }
 }
