@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@business-rules/api/database": ["libs/api/database/src/index.ts"],
       "@business-rules/api/upload-data": ["libs/api/upload-data/src/index.ts"],
       "@business-rules/shared/urls": ["libs/shared/urls/src/index.ts"],
       "@business-rules/shared/utils": ["libs/shared/utils/src/index.ts"]
