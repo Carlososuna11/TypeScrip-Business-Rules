@@ -12,7 +12,7 @@ const config = {
   env: process.env.NODE_ENV || 'development',
 };
 
-const dataSourceOptions: PostgresConnectionOptions = {
+export const dataSourceOptions: PostgresConnectionOptions = {
   type: 'postgres',
   host: config.host,
   port: config.port,
@@ -31,5 +31,3 @@ const dataSourceOptions: PostgresConnectionOptions = {
   logger: config.env === 'production' ? 'file' : 'debug',
   migrations: [join(__dirname, 'migrations/*{.ts,.js}')],
 };
-
-export = dataSourceOptions;
