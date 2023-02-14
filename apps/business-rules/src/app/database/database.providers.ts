@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 
-import { DATABASE_CONNECTION } from '../constants';
+import { DATABASE_CONNECTION } from '@business-rules/shared/utils';
 import dataSourceOptions from './typeorm.config';
 
 export const databaseProviders = [
