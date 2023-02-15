@@ -1,11 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const csv = require('csvtojson');
 import * as XLSX from 'xlsx';
+import { UploadData } from '../entity/upload-data.entity';
 import { UploadDataEntry } from '../validation/upload-csv';
 
 @Injectable()
 export class ApiUploadDataService {
+  constructor(
+    @Inject('UPLOAD_DATA_REPOSITORY')
+    private UploadDataRepository: Repository<UploadData>,
+  ) {}
     /**
      * @method uploadCsv
      * Servicio para carga de archivos csv 
