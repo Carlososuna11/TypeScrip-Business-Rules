@@ -68,7 +68,7 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "nx run business-rules:typeorm migration:create src/database/migrations/{args.name}",
+        "command": "nx run business-rules:typeorm migration:create ../../libs/api/database/src/lib/migrations/{args.name}",
         "cwd": "apps/business-rules"
       }
     },
@@ -76,7 +76,7 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "nx run business-rules:typeorm migration:generate src/database/migrations/{args.name} -d src/app/database/data.source.ts",
+        "command": "nx run business-rules:typeorm migration:generate ../../libs/api/database/src/lib/migrations/{args.name} -d src/app/database/data.source.ts",
         "cwd": "apps/business-rules"
       }
     },
@@ -84,7 +84,7 @@
       "executor": "nx:run-commands",
       "outputs": [],
       "options": {
-        "command": "nx run business-rules:typeorm migration:run -d src/app/database/data.source.ts",
+        "command": "nx run business-rules:typeorm migration:run -d ../../libs/api/database/src/lib/data.source.ts",
         "cwd": "apps/business-rules"
       }
     }
