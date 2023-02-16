@@ -8,10 +8,11 @@ import { UploadDataEntry } from '../validation/upload-csv';
 
 @Injectable()
 export class ApiUploadDataService {
-  constructor(
-    @Inject('UPLOAD_DATA_REPOSITORY')
-    private UploadDataRepository: Repository<UploadData>,
-  ) {}
+  // constructor(
+    // @Inject('UPLOAD_DATA_REPOSITORY')
+    // private UploadDataRepository: Repository<UploadData>
+    
+  // ) {}
     /**
      * @method uploadCsv
      * Servicio para carga de archivos csv 
