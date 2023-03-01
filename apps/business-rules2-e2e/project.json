@@ -1,13 +1,13 @@
 {
-  "name": "business-rules-e2e",
+  "name": "business-rules2-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["business-rules"],
+  "implicitDependencies": ["business-rules2"],
   "targets": {
     "e2e": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
-        "jestConfig": "apps/business-rules-e2e/jest.config.ts",
+        "jestConfig": "apps/business-rules2-e2e/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -15,7 +15,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/business-rules-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/business-rules2-e2e/**/*.{js,ts}"]
       }
     }
   }

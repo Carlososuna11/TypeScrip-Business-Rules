@@ -1,12 +1,10 @@
-import { Controller, Get, Query, Res, Headers, Post, Body } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Post, Query, Res, Headers } from '@nestjs/common';
+import { UploadDataEntry } from '../validation/upload-csv';
 import { ApiUploadDataService } from './api-upload-data.service';
 import { Response } from 'express';
-import { UploadDataEntry } from '../validation/upload-csv';
-import { URLS } from '@business-rules/shared/urls';
+import { URLS } from '@business-rules22/shared/urls';
 
-@Controller()
-@ApiTags('Upload-data')
+@Controller('api-upload-data')
 export class ApiUploadDataController {
   constructor(private apiUploadDataService: ApiUploadDataService) {}
 

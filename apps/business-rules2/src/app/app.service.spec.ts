@@ -14,9 +14,9 @@ describe('AppService', () => {
   });
 
   describe('getData', () => {
-    it('should return "Welcome to business-rules!"', () => {
+    it('should return "Welcome to business-rules2!"', () => {
       expect(service.getData()).toEqual({
-        message: 'Welcome to business-rules!',
+        message: 'Welcome to business-rules2!',
       });
     });
   });

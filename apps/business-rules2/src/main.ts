@@ -10,11 +10,10 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-  const port = process.env.PORT || 3333;
-  const globalPrefix = 'api';
   const app = await NestFactory.create(AppModule);
+  const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-
+  const port = process.env.PORT || 3333;
   const config = new DocumentBuilder()
     .setTitle('Upload data')
     .setDescription('Metodos disponibles en business rules')

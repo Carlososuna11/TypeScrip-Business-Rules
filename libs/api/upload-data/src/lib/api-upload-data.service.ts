@@ -1,18 +1,24 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+import { Post } from './entity/upload.entity';
 const csv = require('csvtojson');
 import * as XLSX from 'xlsx';
-import { UploadData } from '../entity/upload-data.entity';
 import { UploadDataEntry } from '../validation/upload-csv';
 
 @Injectable()
 export class ApiUploadDataService {
-  // constructor(
-    // @Inject('UPLOAD_DATA_REPOSITORY')
-    // private UploadDataRepository: Repository<UploadData>
-    
-  // ) {}
+    constructor(
+        @InjectRepository(Post)
+        private postRepository: Repository<Post>
+    ){}
+
+    async findAll(){
+        // return 'hola'
+        // return await this.postRepository.query('CREATE TABLE post ( id integer)')
+        // const post =  await this.postRepository.query('INSERT INTO post (id) VALUES (2)')
+    }
+
     /**
      * @method uploadCsv
      * Servicio para carga de archivos csv 
@@ -22,8 +28,9 @@ export class ApiUploadDataService {
   async uploadCsv(body: UploadDataEntry) {
     const dataToLoad = await csv({ delimiter: ';' }).fromFile(body.name)
     .then((response) => response)
+    const queryCrateTable = await this.createDynamicTable(dataToLoad)
     
-    return dataToLoad;
+    return await this.postRepository.query(`CREATE TABLE post (${queryCrateTable})`)
   }
 
   /**
@@ -67,6 +74,20 @@ export class ApiUploadDataService {
         if(index > 1)
             response.push(object)
     }
-    return response;
+
+    const queryCrateTable = await this.createDynamicTable(response)
+
+    await this.postRepository.query(`CREATE TABLE xlsx (${queryCrateTable})`)
+    return queryCrateTable;
+  }
+
+  private async createDynamicTable(dataToLoad) {
+    const keys = Object.keys(dataToLoad.shift());
+    const query = ['id integer']
+
+    for (const iterator of keys) {
+        query.push(`${iterator.replace(/-/g, '_')} character varying(255)`)
+    }
+    return query.toString()
   }
 }

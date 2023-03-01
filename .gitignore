@@ -7,7 +7,7 @@ tmp
 
 # dependencies
 node_modules
-.env.dev
+postgres_data
 
 # IDEs and editors
 /.idea
@@ -38,6 +38,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# Next.js
-.next
