@@ -3,8 +3,10 @@ import { UploadDataEntry } from '../validation/upload-csv';
 import { ApiUploadDataService } from './api-upload-data.service';
 import { Response } from 'express';
 import { URLS } from '@business-rules22/shared/urls';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('api-upload-data')
+@Controller()
+@ApiTags('Upload-Data')
 export class ApiUploadDataController {
   constructor(private apiUploadDataService: ApiUploadDataService) {}
 
