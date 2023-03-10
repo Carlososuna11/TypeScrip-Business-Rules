@@ -1,4 +1,7 @@
 export const URLS = {
     uploadCsv: 'api/upload-csv',
-    uploadExcel: 'api/upload-xlsx'
+    uploadExcel: 'api/upload-xlsx',
+
+    //Proyectos
+    createProject: 'api/project'
 }

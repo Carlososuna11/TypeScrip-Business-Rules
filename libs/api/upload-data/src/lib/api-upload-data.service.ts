@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Post } from './entity/upload.entity';
+import { Post } from '../entity/upload.entity';
 const csv = require('csvtojson');
 import * as XLSX from 'xlsx';
 import { UploadDataEntry } from '../validation/upload-csv';

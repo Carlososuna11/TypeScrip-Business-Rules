@@ -20,6 +20,7 @@
       "@business-rules22/api/upload-data": [
         "libs/api/upload-data/src/index.ts"
       ],
+      "@business-rules22/shared/dto": ["libs/shared/dto/src/index.ts"],
       "@business-rules22/shared/urls": ["libs/shared/urls/src/index.ts"],
       "@business-rules22/shared/utils": ["libs/shared/utils/src/index.ts"]
     }
