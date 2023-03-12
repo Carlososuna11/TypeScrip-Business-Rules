@@ -8,6 +8,11 @@ export class ProjectsValidation extends PartialType(ProjectsDto){
     @ApiProperty()
     @IsNotEmpty()
     @IsString()
+    code?: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    @IsString()
     name?: string;
 
     @ApiProperty()

@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+import { ApiUploadDataModule } from '@business-rules22/api/upload-data';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Projects } from '../entity/projects.entity';
 import { ProjectsController } from './api-projects.controller';
@@ -8,7 +9,8 @@ import { ProjectsService } from './api-projects.service';
 @Module({
   imports: [
     // TypeOrmModule.forFeature([Projects])
-    TypeOrmModule.forFeature([Projects, ProjectsRepository])
+    TypeOrmModule.forFeature([Projects, ProjectsRepository]),
+    forwardRef(() => ApiUploadDataModule)
   ],
   controllers: [ProjectsController],
   providers: [ProjectsService],

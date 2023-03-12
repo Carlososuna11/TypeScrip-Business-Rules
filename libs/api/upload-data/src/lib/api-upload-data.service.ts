@@ -22,33 +22,37 @@ export class ApiUploadDataService {
   /**
    * @method uploadCsv
    * Servicio para carga de archivos csv
-   * @param body
-   * @returns
+   * @param body 
+   * @param nameTable 
+   * @param isCreate 
+   * @returns 
    */
-  async uploadCsv(body: UploadDataEntry) {
+  async uploadCsv(body: UploadDataEntry, nameTable='', isCreate = true) {
     const dataToLoad = await csv({ delimiter: ';' })
       .fromFile(body.name)
       .then((response) => response);
     const queryCrateTable = await this.createDynamicTable(dataToLoad);
     const { insert, data } = await this.createDynamicQueryInsert(dataToLoad);
     //borramos la tabla con los datos anteriores
-    await this.postRepository.query(`DROP TABLE post `)
+    if(isCreate === false)
+      await this.postRepository.query(`DROP TABLE ${nameTable} `)
     // //creamos la tabla nueva
-    await this.postRepository.query(`CREATE TABLE post (${queryCrateTable})`)
+    await this.postRepository.query(`CREATE TABLE ${nameTable} (${queryCrateTable})`)
 
-    return await this.postRepository.query(`INSERT INTO post (${insert}) VALUES ${data}`)
+    return await this.postRepository.query(`INSERT INTO ${nameTable} (${insert}) VALUES ${data}`)
   }
 
   /**
    * @method uploadXlsx
    * Servicio para la carga de archivos xlsx (Excel)
-   * @param body
-   * @returns
+   * @param body 
+   * @param nameTable 
+   * @param isCreate 
+   * @returns 
    */
-  async uploadXlsx(body: UploadDataEntry) {
+  async uploadXlsx(body: UploadDataEntry, nameTable='', isCreate = true) {
     const dataToLoad = await XLSX.read(body.name, { type: 'file' });
-
-    // console.log('dataToLoad', dataToLoad.Sheets.primary_data['!ref'].split(':'));
+    
     //se obtiene el valor de los celdas de inicio y final
     const arrayFields = dataToLoad.Sheets.primary_data['!ref'].split(':');
     //se separan dichas celdas para obtener los valores por separado
@@ -81,19 +85,24 @@ export class ApiUploadDataService {
       }
       if (index > 1) response.push(object);
     }
-    
+
     const queryCrateTable = await this.createDynamicTable(response);
-    
     const { insert, data } = await this.createDynamicQueryInsert(response);
     //borramos la tabla con los datos anteriores
-    // await this.postRepository.query(`DROP TABLE post2 `)
+    if(isCreate === false)
+      await this.postRepository.query(`DROP TABLE ${nameTable} `)
     //creamos la tabla nueva
-    await this.postRepository.query(`CREATE TABLE post2 (${queryCrateTable})`)
+    await this.postRepository.query(`CREATE TABLE ${nameTable} (${queryCrateTable})`)
 
-    await this.postRepository.query(`INSERT INTO post2 (${insert}) VALUES ${data}`)
-    return `INSERT INTO post2 (${insert}) VALUES ${data}`;
+    return await this.postRepository.query(`INSERT INTO ${nameTable} (${insert}) VALUES ${data}`)
   }
 
+  /**
+   * @method createDynamicTable
+   * Servicio para generar el create de las tablas de forma dinamica
+   * @param dataToLoad 
+   * @returns 
+   */
   private async createDynamicTable(dataToLoad) {
     const keys = Object.keys(dataToLoad.shift());
     const query = ['id integer'];
@@ -104,6 +113,12 @@ export class ApiUploadDataService {
     return query.toString();
   }
 
+  /**
+   * @method createDynamicQueryInsert
+   * Servicio para generar el insert into de las tablas de forma dinamica
+   * @param dataToLoad 
+   * @returns 
+   */
   private async createDynamicQueryInsert(dataToLoad) {
     const keys = Object.keys(dataToLoad.shift());
     const values = Object.values(dataToLoad);

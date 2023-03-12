@@ -3,5 +3,6 @@ export const URLS = {
     uploadExcel: 'api/upload-xlsx',
 
     //Proyectos
-    createProject: 'api/project'
+    createProject: 'api/project',
+    getUniqueProject: 'api/project/:id',
 }
