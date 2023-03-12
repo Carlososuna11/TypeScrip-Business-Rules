@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString
+import { IsBoolean, IsNotEmpty, IsString
   } from 'class-validator';
   import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { ProjectsDto } from '@business-rules22/shared/dto';
@@ -24,4 +24,11 @@ export class ProjectsValidation extends PartialType(ProjectsDto){
     @IsNotEmpty()
     @IsString()
     file?: string;
+  }
+
+  export class ProjectsUpdateStatusValidation extends PartialType(ProjectsDto){
+    @ApiProperty()
+    @IsNotEmpty()
+    @IsBoolean()
+    status?: boolean;
   }

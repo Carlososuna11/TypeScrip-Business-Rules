@@ -3,7 +3,7 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Projects } from '../entity/projects.entity';
-import { ProjectsValidation } from '../validation/projects.validation';
+import { ProjectsUpdateStatusValidation, ProjectsValidation } from '../validation/projects.validation';
 
 @Injectable()
 export class ProjectsService {
@@ -91,6 +91,21 @@ export class ProjectsService {
     return await this.projectsRepository
       .query(`
       UPDATE projects SET name= '${body.name}', description= '${body.description}', file= '${body.file}' WHERE id = ${id}`)
+      .then(
+        function (user) {
+          console.log(user);
+          return user;
+        },
+        function (err) {
+          console.log(err);
+        }
+      );
+  }
+
+  async updateStatusProject(id: string, body: ProjectsUpdateStatusValidation) {
+    return await this.projectsRepository
+      .query(`
+      UPDATE projects SET status= ${body.status} WHERE id = ${id}`)
       .then(
         function (user) {
           console.log(user);

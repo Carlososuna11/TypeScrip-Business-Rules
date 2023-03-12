@@ -13,6 +13,9 @@ import {
     id: number;
   
     @Column({ type: 'varchar', length: 150 })
+    code: string;
+
+    @Column({ type: 'varchar', length: 150 })
     name: string;
   
     @Column({ type: 'text' })
@@ -20,6 +23,9 @@ import {
   
     @Column({ type: 'varchar', length: 250 })
     file: string;
+
+    @Column({ type: 'boolean', default: true })
+    status: string;
   
     @CreateDateColumn({ type: 'timestamp', name: 'created_at', default: Date.now() })
     createdAt: Date;
