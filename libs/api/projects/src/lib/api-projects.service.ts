@@ -18,46 +18,49 @@ export class ProjectsService {
    * @returns 
    */
   async create(body: ProjectsValidation) {
-    console.log('body', body);
-    // await this.projectsRepository.query('CREATE TABLE projects (id serial, name character varying(255), description character varying(255), file character varying(255), createdAt character varying(255), updatedAt character varying(255))')
-    // return await this.projectsRepository
-    //   .query(
-    //     `
-    //   INSERT INTO projects (name, description, file, createdat, updatedat) VALUES (
-    //     '${body.name}',
-    //     '${body.description}',
-    //     '${body.file}',
-    //     '${new Date().toLocaleDateString()}',
-    //     '${new Date().toLocaleDateString()}'
-    //   )`)
-    //   .then(
-    //     function (user) {
-    //       console.log(user);
-    //       return user;
-    //     },
-    //     function (err) {
-    //       console.log(err);
-    //     }
-    //   );
+    return await this.projectsRepository
+      .query(`
+      INSERT INTO projects (name, description, file, createdat, updatedat) VALUES (
+        '${body.name}',
+        '${body.description}',
+        '${body.file}',
+        '${new Date().toLocaleDateString()}',
+        '${new Date().toLocaleDateString()}'
+      )`)
+      .then(
+        function (user) {
+          console.log(user);
+          return user;
+        },
+        function (err) {
+          console.log(err);
+        }
+      );
 
-    return await this.projectsRepository.createQueryBuilder()
-    .insert()
-    .into(Projects)
-    .values({
-        name: body.name,
-        description: body.description,
-        file: body.file,
-        createdAt: new Date().toLocaleDateString(),
-        updatedAt: new Date().toLocaleDateString()
-    })
-    .execute()
-      .then((res) => {
-        console.log('res', res);
-        return res
-      })
-      .catch((err) => {
-        console.log('err', err);
-        return err
-      });
+    // return await this.projectsRepository.createQueryBuilder()
+    // .insert()
+    // .into(Projects)
+    // .values({
+    //     name: body.name,
+    //     description: body.description,
+    //     file: body.file,
+    //     createdAt: new Date().toLocaleDateString(),
+    //     updatedAt: new Date().toLocaleDateString()
+    // })
+    // .execute()
+    //   .then((res) => {
+    //     console.log('res', res);
+    //     return res
+    //   })
+    //   .catch((err) => {
+    //     console.log('err', err);
+    //     return err
+    //   });
+  }
+
+  async getAll(){
+    return await this.projectsRepository.query(`
+      SELECT * FROM projects
+    `)
   }
 }
