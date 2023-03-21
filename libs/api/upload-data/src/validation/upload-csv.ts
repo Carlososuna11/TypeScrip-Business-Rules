@@ -8,4 +8,9 @@ export class UploadDataEntry {
     @IsNotEmpty()
     @IsString()
     name?: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    @IsString()
+    codeProject?: string;
   }

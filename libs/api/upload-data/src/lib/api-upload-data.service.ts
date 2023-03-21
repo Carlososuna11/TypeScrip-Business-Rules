@@ -13,12 +13,6 @@ export class ApiUploadDataService {
     private postRepository: Repository<Post>
   ) {}
 
-  async findAll() {
-    // return 'hola'
-    // return await this.postRepository.query('CREATE TABLE post ( id integer)')
-    // const post =  await this.postRepository.query('INSERT INTO post (id) VALUES (2)')
-  }
-
   /**
    * @method uploadCsv
    * Servicio para carga de archivos csv
@@ -28,6 +22,7 @@ export class ApiUploadDataService {
    * @returns 
    */
   async uploadCsv(body: UploadDataEntry, nameTable='', isCreate = true) {
+    nameTable = `projects${body.codeProject}`
     const dataToLoad = await csv({ delimiter: ';' })
       .fromFile(body.name)
       .then((response) => response);
@@ -35,7 +30,7 @@ export class ApiUploadDataService {
     const { insert, data } = await this.createDynamicQueryInsert(dataToLoad);
     //borramos la tabla con los datos anteriores
     if(isCreate === false)
-      await this.postRepository.query(`DROP TABLE ${nameTable} `)
+      await this.postRepository.query(`DROP TABLE ${nameTable}`)
     // //creamos la tabla nueva
     await this.postRepository.query(`CREATE TABLE ${nameTable} (${queryCrateTable})`)
 
@@ -51,6 +46,7 @@ export class ApiUploadDataService {
    * @returns 
    */
   async uploadXlsx(body: UploadDataEntry, nameTable='', isCreate = true) {
+    nameTable = `projects${body.codeProject}`
     const dataToLoad = await XLSX.read(body.name, { type: 'file' });
     
     //se obtiene el valor de los celdas de inicio y final

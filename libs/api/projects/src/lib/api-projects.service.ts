@@ -21,12 +21,6 @@ export class ProjectsService {
    * @returns 
    */
   async create(body: ProjectsValidation) {
-    if(body.file){
-      const value = body.file.includes('.csv') ? 
-        await this.apiUploadDataService.uploadCsv({name: body.file}, `project${body.code}`)
-        : await this.apiUploadDataService.uploadXlsx({name: body.file}, `project${body.code}`)
-    }
-
     return await this.projectsRepository
       .query(`
       INSERT INTO projects (name, code, description, file, createdat, updatedat) VALUES (
