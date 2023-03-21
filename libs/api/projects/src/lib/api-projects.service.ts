@@ -23,11 +23,10 @@ export class ProjectsService {
   async create(body: ProjectsValidation) {
     return await this.projectsRepository
       .query(`
-      INSERT INTO projects (name, code, description, file, createdat, updatedat) VALUES (
+      INSERT INTO projects (name, code, description, createdat, updatedat) VALUES (
         '${body.name}',
         '${body.code}',
         '${body.description}',
-        '${body.file}',
         '${new Date().toLocaleDateString()}',
         '${new Date().toLocaleDateString()}'
       )`)

@@ -19,11 +19,6 @@ export class ProjectsValidation extends PartialType(ProjectsDto){
     @IsNotEmpty()
     @IsString()
     description?: string;
-
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsString()
-    file?: string;
   }
 
   export class ProjectsUpdateStatusValidation extends PartialType(ProjectsDto){

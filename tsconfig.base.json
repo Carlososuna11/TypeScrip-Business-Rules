@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": "./",
     "paths": {
+      "@business-rules22/api/data-domain": [
+        "libs/api/data-domain/src/index.ts"
+      ],
       "@business-rules22/api/database": ["libs/api/database/src/index.ts"],
       "@business-rules22/api/projects": ["libs/api/projects/src/index.ts"],
       "@business-rules22/api/upload-data": [
