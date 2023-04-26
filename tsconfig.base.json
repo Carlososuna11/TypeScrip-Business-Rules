@@ -15,13 +15,15 @@
     "skipDefaultLibCheck": true,
     "baseUrl": "./",
     "paths": {
-      "@business-rules22/api/data-domain": [
-        "libs/api/data-domain/src/index.ts"
-      ],
       "@business-rules22/api/database": ["libs/api/database/src/index.ts"],
-      "@business-rules22/api/projects": ["libs/api/projects/src/index.ts"],
-      "@business-rules22/api/upload-data": [
-        "libs/api/upload-data/src/index.ts"
+      "@business-rules22/business-rules2/src/data-domain": [
+        "apps/business-rules2/src/data-domain/src/index.ts"
+      ],
+      "@business-rules22/business-rules2/src/projects": [
+        "apps/business-rules2/src/projects/src/index.ts"
+      ],
+      "@business-rules22/business-rules2/src/upload-data": [
+        "apps/business-rules2/src/upload-data/src/index.ts"
       ],
       "@business-rules22/shared/dto": ["libs/shared/dto/src/index.ts"],
       "@business-rules22/shared/urls": ["libs/shared/urls/src/index.ts"],
