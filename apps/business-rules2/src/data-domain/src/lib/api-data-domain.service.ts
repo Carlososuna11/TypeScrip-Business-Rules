@@ -1,7 +1,6 @@
 import { ProjectsService } from '@business-rules22/business-rules2/src/projects';
 import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import fs = require('fs');
-import readline = require('readline');
 import { DataDomainValidation } from '../validation/dataDomainValidation';
 
 @Injectable()
