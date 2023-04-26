@@ -8,6 +8,6 @@ export const URLS = {
     updateStatusProject: 'api/project-status/:id',
 
     //Dominio de datos
-    listDataDomain: 'api/data-domain/:id',
+    listDataDomain: 'api/data-domain/:code',
     updateDataDomain: 'api/data-domain',
 }

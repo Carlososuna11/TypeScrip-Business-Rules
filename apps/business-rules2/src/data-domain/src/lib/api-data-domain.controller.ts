@@ -12,7 +12,7 @@ export class ApiDataDomainController {
   constructor(private apiDataDomainService: ApiDataDomainService) {}
 
   @Get(URLS.listDataDomain)
-  async listDataDomain(@Param('id') id: string, @Res() res: Response, @Headers() headers) {
+  async listDataDomain(@Param('code') id: string, @Res() res: Response, @Headers() headers) {
     await this.apiDataDomainService.listJsonSchema(id)
     .then((result) => {
       const response = new ResponseService(STATUS.success, result, MESSAGES.success);
