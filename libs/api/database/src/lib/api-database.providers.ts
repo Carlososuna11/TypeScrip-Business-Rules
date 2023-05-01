@@ -1,4 +1,5 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
+const { MOONGOSE_DEBUG } = process.env;
 
 export const DatabaseProvider = [
   TypeOrmModule.forRoot({
